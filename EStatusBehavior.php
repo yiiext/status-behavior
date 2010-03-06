@@ -1,15 +1,13 @@
 <?php
 /**
- * CStatusBehavior class file.
- *
  * Status behavior for models.
  *
  * @author Veaceslav Medvedev <slavcopost@gmail.com>
- * @link http://code.google.com/p/yii-slavco-dev/wiki/CStatusBehavior
+ * @link http://code.google.com/p/yiiext
  *
- * @version 0.4
+ * @version 0.5
  */
-class CStatusBehavior extends CActiveRecordBehavior {
+class EStatusBehavior extends CActiveRecordBehavior {
     /**
      * @var string The name of the table field where data is stored.
      * Required to set on init behavior. No default.
@@ -115,7 +113,7 @@ class CStatusBehavior extends CActiveRecordBehavior {
      */
     public function setStatus($status) {
         if (($this->status = array_search($status, $this->statuses)) === FALSE)
-            throw new CException(Yii::t(__CLASS__, 'Status "{status}" is not allowed.',
+            throw new CException(Yii::t('yiiext', 'Status "{status}" is not allowed.',
                 array('{status}' => $status), __CLASS__));
 
         $this->getOwner()->{$this->statusField} = $this->status;
@@ -135,7 +133,7 @@ class CStatusBehavior extends CActiveRecordBehavior {
     /**
      * Transform status value to text.
      *
-     * @return CStatusBehavior
+     * @return EStatusBehavior
      */
     protected function parseStatus() {
         $this->statusText = isset($this->statuses[$this->getStatus()])
