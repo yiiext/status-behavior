@@ -9,6 +9,7 @@ Add field to model and DB table. Field `status` is used as example.
 Field type depends on behavior configuration.
 
 Configure model:
+
 ~~~
 [php]
 class Post extends CActiveRecord {
