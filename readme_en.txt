@@ -10,7 +10,8 @@ Field type depends on behavior configuration.
 
 Configure model:
 
-~~~
+~~~php
+<?php
 class Post extends CActiveRecord {
     public function behaviors() {
         return array(
@@ -32,7 +33,8 @@ Examples
 --------
 
 ### Configuring models
-~~~
+~~~php
+<?php
 class Post extends CActiveRecord {
     public function behaviors() {
         return array(
@@ -62,7 +64,8 @@ class Book extends CActiveRecord {
 ~~~
 
 ### Using statuses
-~~~
+~~~php
+<?php
 $post=Post::model()->findByPk(1);
 // Getting current status
 echo $post->getStatus();
