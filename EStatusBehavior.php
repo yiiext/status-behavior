@@ -132,4 +132,11 @@ class EStatusBehavior extends CActiveRecordBehavior
 
         parent::afterFind($event);
     }
+
+    public function hasStatus($statuses = array()) {
+        if (!is_array($statuses)) {
+            $statuses = explode(',',$statuses);
+        }
+        return in_array($this->getOwner()->getAttribute($this->statusField), $statuses);
+    }
 }
