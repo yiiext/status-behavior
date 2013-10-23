@@ -143,12 +143,12 @@ class EStatusBehavior extends CActiveRecordBehavior
 
 	public function status($status)
 	{
-		$this->getDbCriteria()->mergeWith(
+		$this->owner->getDbCriteria()->mergeWith(
 			array(
-				 'condition' => "{$this->statusField} = :status",
-				 'params'	 => array(':status' => $status)
+				 'condition' => "{$this->getOwner()->getTableAlias()}.{$this->statusField} = :status",
+				 'params' => array(':status' => $status)
 			)
 		);
-		return $this;
+		return $this->owner;
 	}
 }
