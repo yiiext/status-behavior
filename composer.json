@@ -1,0 +1,10 @@
+{
+    "name": "yiiext/status-behavior",
+    "description": "Yii Framework Active Record Status behavior for models",
+    "autoload": {
+        "classmap": ["/"]
+    },
+    "require": {
+
+    }
+}
