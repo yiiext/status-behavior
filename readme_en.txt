@@ -72,7 +72,7 @@ echo $post->getStatus();
 // Changing status
 $post->setStatus('draft');
 // Saving model
-if ($post->save() === FASLE) {
+if ($post->save() === FALSE) {
     echo 'Error!';
 }
 
