@@ -9,13 +9,13 @@
 class EStatusBehavior extends CActiveRecordBehavior
 {
 	/**
-	 * @var string $statusField the name of the table field where data is stored.
+	 * @var string the name of the table field where data is stored.
 	 * Required to set on init behavior. No default.
 	 */
 	public $statusField = null;
 
 	/**
-	 * @var array $statuses the possible statuses.
+	 * @var array the possible statuses.
 	 * Default: draft, published, archived.
 	 * @see setStatuses
 	 */
