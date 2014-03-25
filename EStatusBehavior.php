@@ -143,10 +143,11 @@ class EStatusBehavior extends CActiveRecordBehavior
 
 	public function status($status)
 	{
-		$criteria = $this->owner->getDbCriteria();
-		$column   = $this->owner->getDbConnection()->quoteColumnName($owner->getTableAlias().'.'.$this->statusField);
+		$criteria = $this->getOwner()->getDbCriteria();
+		$column = $this->getOwner()->getDbConnection()->quoteColumnName($this->getOwner()->getTableAlias().'.'.$this->statusField);
 		$criteria->addCondition($column.'='.CDbCriteria::PARAM_PREFIX.CDbCriteria::$paramCount);
 		$criteria->params[CDbCriteria::PARAM_PREFIX.CDbCriteria::$paramCount++]=$status;
-		return $this->owner;
+
+		return $this->getOwner();
 	}
 }
