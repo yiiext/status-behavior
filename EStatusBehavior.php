@@ -1,8 +1,9 @@
 <?php
 /**
  * Status behavior for models.
+ *
  * @author	Veaceslav Medvedev <slavcopost@gmail.com>
- * @link	http://code.google.com/p/yiiext
+ * @link	https://github.com/yiiext/status-behavior
  * @version 0.6
  */
 class EStatusBehavior extends CActiveRecordBehavior
@@ -12,9 +13,10 @@ class EStatusBehavior extends CActiveRecordBehavior
 	 * Required to set on init behavior. No default.
 	 */
 	public $statusField = null;
+
 	/**
 	 * @var array the possible statuses.
-	 *		Default draft, published, archived
+	 * Default: draft, published, archived.
 	 * @see setStatuses
 	 */
 	public $statuses = array('draft', 'published', 'archived');
@@ -23,11 +25,10 @@ class EStatusBehavior extends CActiveRecordBehavior
 	protected $_statusText = 'unknown';
 
 	/**
-	 * Check required properties and attaches the behavior object to the component.
+	 * Checks required properties and attaches the behavior object to the component.
 	 *
-	 * @param CComponent owner component.
-	 *
-	 * @throws CException if required properties not set.
+	 * @param CActiveRecord $owner owner model.
+	 * @throws CException if required properties are not set.
 	 */
 	public function attach($owner)
 	{
@@ -44,7 +45,7 @@ class EStatusBehavior extends CActiveRecordBehavior
 	}
 
 	/**
-	 * @return string the status.
+	 * @return string status value.
 	 * @see getStatus
 	 */
 	public function __toString()
@@ -55,8 +56,7 @@ class EStatusBehavior extends CActiveRecordBehavior
 	/**
 	 * Init valid statuses values.
 	 *
-	 * @param array valid values for status.
-	 *
+	 * @param array $statuses valid values for status.
 	 * @return CActiveRecord owner model.
 	 */
 	public function setStatuses($statuses)
@@ -86,10 +86,9 @@ class EStatusBehavior extends CActiveRecordBehavior
 	/**
 	 * Set status for model.
 	 *
-	 * @param string status value or status text for model.
-	 *
+	 * @param string $status status value or status text for model.
 	 * @return CActiveRecord owner model.
-	 * @throws CException if status invalid.
+	 * @throws CException if status is invalid.
 	 */
 	public function setStatus($status)
 	{
@@ -112,7 +111,8 @@ class EStatusBehavior extends CActiveRecordBehavior
 	}
 
 	/**
-	 * Save status. Will be save only status attribute for model.
+	 * Save status. Will save only status attribute for model.
+	 *
 	 * @return boolean whether the saving succeeds.
 	 */
 	public function saveStatus()
@@ -123,24 +123,37 @@ class EStatusBehavior extends CActiveRecordBehavior
 	/**
 	 * Load status after find model.
 	 *
-	 * @param CEvent
+	 * @param CEvent $event the event parameter
 	 */
 	public function afterFind($event)
 	{
-		$this->_status	   = $this->getOwner()->getAttribute($this->statusField);
+		$this->_status = $this->getOwner()->getAttribute($this->statusField);
 		$this->_statusText = isset($this->statuses[$this->_status]) ? $this->statuses[$this->_status] : 'unknown';
 
 		parent::afterFind($event);
 	}
 
+	/**
+	 * Has status.
+	 *
+	 * @param string|array $statuses the possible statuses.
+	 * @return bool
+	 */
 	public function hasStatus($statuses = array())
 	{
 		if (!is_array($statuses)) {
 			$statuses = explode(',', $statuses);
 		}
+
 		return in_array($this->getOwner()->getAttribute($this->statusField), $statuses);
 	}
 
+	/**
+	 * Named scope.
+	 *
+	 * @param string|integer $status status.
+	 * @return CActiveRecord owner model.
+	 */
 	public function status($status)
 	{
 		$criteria = $this->getOwner()->getDbCriteria();
